@@ -154,6 +154,24 @@ a {
 
 }  
 
+.video-container {
+	position: relative;
+	width: 1030px; /* replace with your desired video width */
+	height: 560px; /* replace with your desired video height */
+	margin: 0 auto;
+  }
+  
+  .video-container iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+  }
+  
+
+
+
 a:focus, img:focus, button:focus, .btn:focus {outline: none;}
 
 /*selecting with mouse color*/
