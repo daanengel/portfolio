@@ -168,6 +168,21 @@ a {
 	width: 100%;
 	height: 100%;
   }
+
+  .video-container_mp4 {
+	width: 1228px; /* replace with your desired video width */
+	height: 2160px; /* replace with your desired video height */
+	margin: 0 auto;
+  }
+  
+  .video-container_mp4 iframe {
+	position: absolute;
+	top: 50%; /* change top to 50% to position the top of the iframe in the middle */
+	left: 50%; /* change left to 50% to position the left of the iframe in the middle */
+	transform: translate(-50%, -50%); /* add this line to center the iframe both vertically and horizontally */
+	width: 50%;
+	height: 50%;
+  }
   
 
 
@@ -197,7 +212,7 @@ header[role="header"] nav ul{ display:none; position: fixed; z-index:60; text-al
 
 header[role="header"] nav ul > li{ font-weight:800; font-size:42px; display:block}
 
-header[role="header"] nav ul > li > a{ display:block; line-height:72px; color:#404040}
+header[role="header"] nav ul > li > a{ display:block; line-height:72px; color:#778183}
 /*burger menu text highlight color*/
 header[role="header"] nav ul > li:hover a,header[role="header"] nav ul > li.nav-active a{ text-decoration:none; color:#60d2ff}
 
@@ -238,13 +253,12 @@ main[role="main-home-wrapper"],main[role="main-inner-wrapper"] { padding-bottom:
 main[role="main-home-wrapper"] article[role="pge-title-content"],main[role="main-inner-wrapper"] article[role="pge-title-content"]{ padding-left:41px}
 
 main[role="main-home-wrapper"] article[role="pge-title-content"] header,main[role="main-inner-wrapper"] article[role="pge-title-content"] header{ padding-bottom:19px; padding-top:83px}
-
-main[role="main-home-wrapper"] article[role="pge-title-content"] header h2,main[role="main-inner-wrapper"] article[role="pge-title-content"] header h2{ font-size:46px; line-height:53px; color:#404040; font-weight:800}
-
+/*subtitle color*/
+main[role="main-home-wrapper"] article[role="pge-title-content"] header h2,main[role="main-inner-wrapper"] article[role="pge-title-content"] header h2{ font-size:46px; line-height:53px; color:#849494; font-weight:800}
 /*main title color*/
 main[role="main-home-wrapper"] article[role="pge-title-content"] header h2 span,main[role="main-inner-wrapper"] article[role="pge-title-content"] header h2 span{ display:block; font-size:80px; color:#60d2ff; padding-bottom:15px}
-
-main[role="main-home-wrapper"] article[role="pge-title-content"] p,main[role="main-inner-wrapper"] article[role="pge-title-content"] p{ font-size:20px; line-height:30px; color:#454545}
+/*main text color*/
+main[role="main-home-wrapper"] article[role="pge-title-content"] p,main[role="main-inner-wrapper"] article[role="pge-title-content"] p{ font-size:20px; line-height:30px; color:#dcdcdc}
 
 /*===== footer ===*/
 /*color of the bottom of page*/
@@ -276,8 +290,8 @@ footer[role="footer"] .copy-right{ text-align:center; display:block; font-size:1
 /*===== About ===*/
 
 main[role="main-inner-wrapper"] .about-content{ background-color:#191919; padding-top:57px; padding-left:70px; padding-right:67px; padding-bottom:58px}
-
-main[role="main-inner-wrapper"] .about-content p{ font-size:17px; line-height:30px; color:#FFF; padding-bottom:20px}
+/*about section text color*/
+main[role="main-inner-wrapper"] .about-content p{ font-size:17px; line-height:30px; color:#dcdcdc; padding-bottom:20px}
 
 main[role="main-inner-wrapper"] .thumbnails-pan{ padding-top:30px}
 
