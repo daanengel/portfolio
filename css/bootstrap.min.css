@@ -1365,13 +1365,14 @@ html {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
 }
 
+/*change work text color*/
 /*change background color*/
 body {
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
     font-size: 13px;
     line-height: 1.42857143;
-    color: #353535;
+    color: #c2c2c2;
     background-color: #1d1d1d
 }
 
