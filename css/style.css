@@ -170,8 +170,8 @@ a {
   }
 
   .video-container_mp4 {
-	width: 1228px; /* replace with your desired video width */
-	height: 2160px; /* replace with your desired video height */
+	width: 921px; /* replace with your desired video width */
+	height: 1620px; /* replace with your desired video height */
 	margin: 0 auto;
   }
   
@@ -180,8 +180,8 @@ a {
 	top: 50%; /* change top to 50% to position the top of the iframe in the middle */
 	left: 50%; /* change left to 50% to position the left of the iframe in the middle */
 	transform: translate(-50%, -50%); /* add this line to center the iframe both vertically and horizontally */
-	width: 50%;
-	height: 50%;
+	width: 70%;
+	height: 70%;
   }
   
 
