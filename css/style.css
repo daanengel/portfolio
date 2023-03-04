@@ -154,6 +154,7 @@ a {
 
 }  
 
+/* below are meant to put video into position*/
 .video-container {
 	position: relative;
 	width: 1030px; /* replace with your desired video width */
@@ -170,8 +171,8 @@ a {
   }
 
   .video-container_mp4 {
-	width: 921px; /* replace with your desired video width */
-	height: 1620px; /* replace with your desired video height */
+	width: 400px; /* replace with your desired video width */
+	height: 600px; /* replace with your desired video height */
 	margin: 0 auto;
   }
   
@@ -183,8 +184,42 @@ a {
 	width: 70%;
 	height: 70%;
   }
-  
 
+  /*below are meant to contrain/crop the images of about page to certain aspect ratios*/
+  .img-wrapper {
+	position: relative;
+	padding-top: 66.67%;
+  }
+  
+  .img-wrapper img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: top; /*when cropping, adjust this and the top/left values to control the crop*/
+  }
+  
+  .img-wrapper-full {
+	position: relative;
+	padding-top: 56.25%;
+  }
+  
+  .img-wrapper-full img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: top;  /*when cropping, adjust this and the top/left values to control the crop*/
+  }
+  
+  /* aspect ratios, to put after "padding-top:" 
+ - 16:9 is 56.25%
+ - 21:9 is 42.86%
+  */
 
 
 a:focus, img:focus, button:focus, .btn:focus {outline: none;}
@@ -295,7 +330,7 @@ main[role="main-inner-wrapper"] .about-content p{ font-size:17px; line-height:30
 
 main[role="main-inner-wrapper"] .thumbnails-pan{ padding-top:30px}
 
-main[role="main-inner-wrapper"] .thumbnails-pan section figure{ background-color:#3a2020; position:relative; overflow:hidden; cursor:pointer}
+main[role="main-inner-wrapper"] .thumbnails-pan section figure{ background-color:#3a202000; position:relative; overflow:hidden; cursor:pointer}
 
 main[role="main-inner-wrapper"] .thumbnails-pan section figure,main[role="main-inner-wrapper"] .thumbnails-pan section figure, img,main[role="main-inner-wrapper"] .thumbnails-pan section figure figcaption,section.blog-content figure,section.blog-content figure img,section.blog-content  article{transition-delay: 0s;transition-duration: 0.6s;transition-property: all;transition-timing-function: ease;}
 /*about section images hover over text and block color*/
