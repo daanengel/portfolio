@@ -310,7 +310,7 @@ footer[role="footer"] nav > ul > li{ display: inline-block; text-transform:upper
 /*work about blog contact text at bottom*/
 footer[role="footer"] nav > ul > li > a{ color:#9d9d9d}
 
-footer[role="footer"] nav > ul > li:hover a{ text-decoration:none; color:#fb5353}
+footer[role="footer"] nav > ul > li:hover a{ text-decoration:none; color:#60d2ff}
 
 footer[role="footer"] ul[role="social-icons"]{ padding:0; margin:0; text-align:center; padding-bottom:40px;}
 
@@ -326,7 +326,7 @@ footer[role="footer"] .copy-right{ text-align:center; display:block; font-size:1
 
 main[role="main-inner-wrapper"] .about-content{ background-color:#191919; padding-top:57px; padding-left:70px; padding-right:67px; padding-bottom:58px}
 /*about section text color*/
-main[role="main-inner-wrapper"] .about-content p{ font-size:17px; line-height:30px; color:#dcdcdc; padding-bottom:20px}
+main[role="main-inner-wrapper"] .about-content p{ font-size:15px; line-height:25px; color:#dcdcdc; padding-bottom:20px}
 
 main[role="main-inner-wrapper"] .thumbnails-pan{ padding-top:30px}
 
