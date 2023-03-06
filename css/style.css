@@ -171,7 +171,7 @@ a {
   }
 
   .video-container_mp4 {
-	width: 400px; /* replace with your desired video width */
+	width: 341px; /* replace with your desired video width */
 	height: 600px; /* replace with your desired video height */
 	margin: 0 auto;
   }
@@ -181,8 +181,8 @@ a {
 	top: 50%; /* change top to 50% to position the top of the iframe in the middle */
 	left: 50%; /* change left to 50% to position the left of the iframe in the middle */
 	transform: translate(-50%, -50%); /* add this line to center the iframe both vertically and horizontally */
-	width: 70%;
-	height: 70%;
+	width: 75%;
+	height: 75%;
   }
 
   /*below are meant to contrain/crop the images of about page to certain aspect ratios*/
