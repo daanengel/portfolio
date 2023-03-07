@@ -157,8 +157,8 @@ a {
 /* below are meant to put video into position*/
 .video-container {
 	position: relative;
-	width: 1030px; /* replace with your desired video width */
-	height: 560px; /* replace with your desired video height */
+	width: 1140px; /* replace with your desired video width */
+	height: 641px; /* replace with your desired video height */
 	margin: 0 auto;
   }
   
