@@ -1,0 +1,890 @@
+:root {
+  --ink: #2b2731;
+  --muted: #706a7c;
+  --app-bg: #f7f7f9;
+  --panel-bg: rgba(255, 255, 255, 0.88);
+  --pill-bg: rgba(255, 255, 255, 0.74);
+  --surface-strong: rgba(255, 255, 255, 0.96);
+  --border: rgba(80, 72, 96, 0.18);
+  --border-strong: rgba(80, 72, 96, 0.34);
+  --accent: #7c5cff;
+  --accent-soft: rgba(124, 92, 255, 0.12);
+  --shadow-soft: 0 18px 44px rgba(35, 30, 47, 0.12);
+  --shadow-subtle: 0 8px 22px rgba(35, 30, 47, 0.08);
+}
+
+:root.theme-dark {
+  --ink: #e8e5ee;
+  --muted: #a7a0b3;
+  --app-bg: #1e1e23;
+  --panel-bg: rgba(34, 33, 39, 0.9);
+  --pill-bg: rgba(43, 41, 49, 0.82);
+  --surface-strong: rgba(38, 37, 44, 0.96);
+  --border: rgba(218, 211, 232, 0.14);
+  --border-strong: rgba(218, 211, 232, 0.28);
+  --accent: #a78bfa;
+  --accent-soft: rgba(167, 139, 250, 0.16);
+  --shadow-soft: 0 20px 52px rgba(0, 0, 0, 0.34);
+  --shadow-subtle: 0 10px 28px rgba(0, 0, 0, 0.24);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--ink);
+  background: var(--app-bg);
+  overflow: hidden;
+}
+
+button {
+  font: inherit;
+}
+
+.app-shell {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(124, 92, 255, 0.04), transparent 34%),
+    var(--app-bg);
+}
+
+.theme-toggle {
+  position: absolute;
+  left: 22px;
+  bottom: 22px;
+  z-index: 80;
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  width: 58px;
+  height: 30px;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: var(--pill-bg);
+  color: var(--ink);
+  cursor: pointer;
+  box-shadow: var(--shadow-subtle);
+  backdrop-filter: blur(18px);
+}
+
+.theme-toggle::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 4px 12px rgba(124, 92, 255, 0.28);
+  transition: transform 150ms ease;
+}
+
+.theme-toggle.is-active::before {
+  transform: translateX(28px);
+}
+
+.theme-toggle-sun,
+.theme-toggle-moon {
+  position: relative;
+  z-index: 1;
+  font-size: 0.9rem;
+  line-height: 1;
+  text-align: center;
+}
+
+.timeline-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: default;
+}
+
+.path-trail {
+  position: absolute;
+  top: 18px;
+  left: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  max-width: min(18rem, calc(100vw - 560px));
+  pointer-events: auto;
+  z-index: 30;
+}
+
+.document-toolbar {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  display: grid;
+  justify-items: end;
+  gap: 10px;
+  max-width: min(52rem, calc(100vw - 56px));
+  pointer-events: auto;
+  z-index: 90;
+}
+
+.document-toolbar-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  min-width: 0;
+}
+
+.document-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  max-width: min(22rem, 30vw);
+  padding: 7px 11px;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  background: var(--pill-bg);
+  color: var(--muted);
+  font-size: 0.84rem;
+  line-height: 1.2;
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-shadow: var(--shadow-subtle);
+  backdrop-filter: blur(18px);
+}
+
+.document-status-name {
+  min-width: 0;
+  max-width: 15rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--ink);
+  font-weight: 650;
+}
+
+.document-status-detail {
+  flex: 0 0 auto;
+  color: var(--muted);
+}
+
+.document-status-detail::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  margin: 0 8px 2px 0;
+  border-radius: 50%;
+  background: var(--border-strong);
+}
+
+.document-actions {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  background: var(--pill-bg);
+  box-shadow: var(--shadow-subtle);
+  backdrop-filter: blur(18px);
+}
+
+.toolbar-btn,
+.reset-btn {
+  border: 1px solid transparent;
+  border-radius: 9px;
+  padding: 6px 10px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.84rem;
+  font-weight: 650;
+  line-height: 1.2;
+}
+
+.toolbar-btn:hover,
+.reset-btn:hover,
+.toolbar-btn.is-active {
+  border-color: var(--border-strong);
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+
+.help-btn {
+  width: 30px;
+  padding-inline: 0;
+  text-align: center;
+}
+
+.controls-help {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 100;
+  width: min(25rem, calc(100vw - 40px));
+  max-height: calc(100vh - 92px);
+  overflow-y: auto;
+  border: 1px solid var(--border-strong);
+  border-radius: 14px;
+  background: var(--panel-bg);
+  padding: 14px 16px;
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(20px);
+  font-size: 0.86rem;
+  line-height: 1.35;
+}
+
+.controls-help[hidden] {
+  display: none;
+}
+
+.controls-help-title {
+  margin-bottom: 10px;
+  font-weight: 750;
+  letter-spacing: 0.02em;
+}
+
+.controls-help-about-toggle {
+  width: 100%;
+  margin: 0 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface-strong);
+  color: var(--ink);
+  padding: 7px 12px;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 650;
+  text-align: left;
+}
+
+.controls-help-about-toggle:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.controls-help-about {
+  margin: 0 0 16px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface-strong);
+}
+
+.controls-help-about[hidden] {
+  display: none;
+}
+
+.controls-help-about h3,
+.controls-help-about p {
+  margin: 0;
+}
+
+.controls-help-about h3 {
+  font-size: 0.88rem;
+  line-height: 1.25;
+}
+
+.controls-help-about h3 + p,
+.controls-help-about p + h3,
+.controls-help-about p + p {
+  margin-top: 10px;
+}
+
+.controls-help-about p {
+  color: var(--muted);
+}
+
+.controls-help-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+}
+
+.controls-help-list > div {
+  display: grid;
+  grid-template-columns: minmax(6.5rem, 0.8fr) minmax(0, 1.4fr);
+  gap: 14px;
+  align-items: start;
+}
+
+.controls-help-list dt,
+.controls-help-list dd {
+  margin: 0;
+}
+
+.controls-help-list dt {
+  color: var(--muted);
+  font-weight: 650;
+}
+
+.moment-meta-panel {
+  position: absolute;
+  top: 100px;
+  right: 56px;
+  width: min(28vw, 440px);
+  min-width: 320px;
+  max-height: calc(100vh - 120px);
+  display: grid;
+  gap: 24px;
+  pointer-events: auto;
+  z-index: 50;
+}
+
+.moment-meta-title,
+.moment-meta-body {
+  width: 100%;
+  border: 1px solid var(--border-strong);
+  border-radius: 18px;
+  background: var(--panel-bg);
+  color: var(--ink);
+  outline: none;
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(20px);
+}
+
+.moment-meta-title {
+  min-height: 74px;
+  padding: 0 24px;
+  font: 650 1.22rem/1.2 ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.moment-meta-body {
+  min-height: min(74vh, calc(100vh - 250px));
+  max-height: calc(100vh - 230px);
+  padding: 18px 30px 18px 18px;
+  overflow: hidden;
+  position: relative;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 16px;
+}
+
+.moment-pages-region {
+  position: relative;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.moment-pages-region > .moment-page-input.is-solo {
+  min-height: 100%;
+}
+
+.moment-pages-stack {
+  position: relative;
+  width: calc(100% - 26px);
+  height: 100%;
+  min-height: 0;
+  --page-preview-height: min(110px, 22%);
+  --page-stack-gap: 14px;
+  overflow: hidden;
+}
+
+.moment-pages-scrollbar {
+  position: absolute;
+  top: 18px;
+  right: 2px;
+  bottom: 18px;
+  width: 10px;
+  cursor: pointer;
+}
+
+.moment-pages-scrollbar-track,
+.moment-pages-scrollbar-thumb {
+  position: absolute;
+  inset-inline: 0;
+  border-radius: 999px;
+}
+
+.moment-pages-scrollbar-track {
+  top: 0;
+  bottom: 0;
+  background: rgba(80, 72, 96, 0.08);
+  border: 1px solid var(--border-strong);
+}
+
+.moment-pages-scrollbar-thumb {
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  cursor: grab;
+}
+
+.moment-page-card {
+  position: absolute;
+  border-radius: 14px;
+  background: var(--surface-strong);
+  border: 1px solid var(--border);
+  padding: 14px 16px 16px;
+  cursor: pointer;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 10px;
+  overflow: hidden;
+  transition:
+    top 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    bottom 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    height 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 140ms ease,
+    border-color 140ms ease;
+}
+
+.moment-page-card.is-active {
+  border-color: color-mix(in srgb, var(--accent) 60%, transparent);
+  box-shadow: 0 0 0 1px var(--accent-soft);
+  cursor: default;
+}
+
+.moment-page-card.is-hidden {
+  pointer-events: none;
+}
+
+.moment-page-label {
+  margin-bottom: 10px;
+  color: var(--muted);
+  font-size: 0.76rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.moment-page-input,
+.moment-page-preview {
+  min-height: 0;
+  font: 400 1rem/1.6 ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--ink);
+}
+
+.moment-page-input {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  padding: 0;
+  resize: none;
+  outline: none;
+  background: transparent;
+}
+
+.moment-page-input.is-solo {
+  min-height: 100%;
+}
+
+.moment-page-preview {
+  white-space: pre-wrap;
+  opacity: 0.74;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.moment-attachments {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 10px;
+  position: relative;
+  z-index: 2;
+  background: var(--panel-bg);
+  padding-top: 6px;
+  min-height: 0;
+  max-height: min(18vh, 156px);
+}
+
+.moment-attachments-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  min-height: 30px;
+}
+
+.moment-attachments-title,
+.moment-attachments-add,
+.moment-attachment-pill {
+  font: inherit;
+}
+
+.moment-attachments-title {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.moment-attachments-add {
+  flex: 0 0 auto;
+  border: 1px solid var(--border-strong);
+  border-radius: 9px;
+  background: var(--surface-strong);
+  color: var(--ink);
+  padding: 3px 9px;
+  font-size: 0.78rem;
+  line-height: 1.1;
+  min-height: 28px;
+  cursor: pointer;
+}
+
+.moment-attachments-add:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.moment-attachments-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  min-height: 0;
+  max-height: none;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 12px;
+  padding-top: 2px;
+  padding-bottom: 4px;
+  align-content: flex-start;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) rgba(80, 72, 96, 0.08);
+  scrollbar-gutter: stable;
+}
+
+.moment-attachments-list::-webkit-scrollbar {
+  width: 10px;
+}
+
+.moment-attachments-list::-webkit-scrollbar-track {
+  background: rgba(80, 72, 96, 0.08);
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+}
+
+.moment-attachments-list::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+}
+
+.moment-attachments-empty {
+  color: var(--muted);
+  font-size: 0.94rem;
+  line-height: 1.4;
+}
+
+.moment-attachment-pill {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: var(--surface-strong);
+  color: var(--ink);
+  padding: 7px 14px;
+  cursor: pointer;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 34px;
+}
+
+.moment-attachment-pill.is-available,
+.moment-attachment-pill.is-checking {
+  border-color: var(--accent);
+}
+
+.moment-attachment-pill.is-missing {
+  border-color: #c39a18;
+  background: rgba(239, 211, 75, 0.14);
+}
+
+.moment-attachment-pill.is-static {
+  cursor: default;
+}
+
+.moment-attachment-pill.is-selected {
+  border-color: #efd34b;
+  background: rgba(239, 211, 75, 0.26);
+  box-shadow: 0 0 0 2px rgba(239, 211, 75, 0.36);
+}
+
+.moment-attachment-pill.is-previewable:hover {
+  border-color: var(--accent);
+}
+
+:root.theme-dark .document-status,
+:root.theme-dark .document-actions,
+:root.theme-dark .toolbar-btn,
+:root.theme-dark .reset-btn,
+:root.theme-dark .theme-toggle,
+:root.theme-dark .moment-meta-title,
+:root.theme-dark .moment-meta-body,
+:root.theme-dark .moment-attachments-add,
+:root.theme-dark .moment-attachment-pill,
+:root.theme-dark .controls-help-about-toggle,
+:root.theme-dark .controls-help-about,
+:root.theme-dark .controls-help {
+  border-color: var(--border-strong);
+}
+
+:root.theme-dark .document-status,
+:root.theme-dark .document-status-name,
+:root.theme-dark .toolbar-btn,
+:root.theme-dark .reset-btn,
+:root.theme-dark .theme-toggle,
+:root.theme-dark .moment-attachments-add,
+:root.theme-dark .moment-attachment-pill,
+:root.theme-dark .controls-help-about-toggle,
+:root.theme-dark .controls-help {
+  color: var(--ink);
+}
+
+:root.theme-dark .toolbar-btn:hover,
+:root.theme-dark .reset-btn:hover,
+:root.theme-dark .toolbar-btn.is-active,
+:root.theme-dark .controls-help-about-toggle:hover,
+:root.theme-dark .moment-attachments-add:hover,
+:root.theme-dark .moment-attachment-pill.is-previewable:hover {
+  border-color: var(--accent);
+  color: var(--ink);
+}
+
+:root.theme-dark .theme-toggle::before,
+:root.theme-dark .moment-pages-scrollbar-thumb,
+:root.theme-dark .moment-attachments-list::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+:root.theme-dark .document-status-detail::before,
+:root.theme-dark .path-separator::before,
+:root.theme-dark .path-separator::after {
+  background: var(--border-strong);
+}
+
+:root.theme-dark .moment-meta-title,
+:root.theme-dark .moment-meta-body,
+:root.theme-dark .moment-pages-scrollbar-track,
+:root.theme-dark .moment-attachments-list::-webkit-scrollbar-track {
+  border-color: var(--border-strong);
+}
+
+:root.theme-dark .document-status-detail,
+:root.theme-dark .moment-attachments-title,
+:root.theme-dark .moment-attachments-empty,
+:root.theme-dark .moment-page-label,
+:root.theme-dark .controls-help-list dt {
+  color: var(--muted);
+}
+
+:root.theme-dark .moment-meta-title::placeholder,
+:root.theme-dark .moment-page-input::placeholder {
+  color: color-mix(in srgb, var(--muted) 55%, transparent);
+}
+
+.moment-meta-title::placeholder,
+.moment-page-input::placeholder {
+  color: color-mix(in srgb, var(--muted) 55%, transparent);
+}
+
+.moment-meta-title:focus,
+.moment-page-input:focus {
+  border-color: var(--accent);
+}
+
+.moment-meta-panel.is-empty {
+  opacity: 0.54;
+}
+
+.moment-meta-title:disabled,
+.moment-page-input:disabled {
+  cursor: default;
+}
+
+.path-entry {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.path-link {
+  border: 0;
+  border-radius: 8px;
+  padding: 3px 6px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.92rem;
+  line-height: 1.2;
+}
+
+.path-link.is-active {
+  color: var(--ink);
+  font-weight: 650;
+  background: var(--pill-bg);
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+
+.path-separator {
+  position: relative;
+  display: block;
+  width: 24px;
+  height: 12px;
+  margin-left: 8px;
+}
+
+.path-separator::before,
+.path-separator::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  width: 15px;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--border-strong);
+}
+
+.path-separator::before {
+  left: 0;
+  transform: rotate(30deg);
+  transform-origin: right center;
+}
+
+.path-separator::after {
+  right: 0;
+  transform: rotate(-30deg);
+  transform-origin: left center;
+}
+
+@media (max-width: 560px) {
+  .path-trail {
+    top: 14px;
+    left: 16px;
+    max-width: calc(100vw - 32px);
+    gap: 6px;
+  }
+
+  .document-toolbar {
+    top: 46px;
+    right: 16px;
+    left: 16px;
+    gap: 10px;
+    max-width: none;
+    justify-items: stretch;
+  }
+
+  .document-toolbar-row {
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .document-status {
+    max-width: 38vw;
+    font-size: 0.8rem;
+    text-align: left;
+  }
+
+  .document-actions {
+    gap: 6px;
+    padding: 3px;
+  }
+
+  .path-link {
+    font-size: 0.84rem;
+  }
+
+  .toolbar-btn,
+  .reset-btn {
+    padding: 5px 8px;
+    font-size: 0.8rem;
+  }
+
+  .help-btn {
+    width: 28px;
+    padding-inline: 0;
+  }
+
+  .controls-help {
+    width: 100%;
+    font-size: 0.8rem;
+  }
+
+  .controls-help-list > div {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}
+
+@media (max-width: 980px) {
+  .moment-meta-panel {
+    top: auto;
+    right: 16px;
+    bottom: 18px;
+    left: 16px;
+    width: auto;
+    min-width: 0;
+    max-height: calc(100vh - 90px);
+    gap: 14px;
+  }
+
+  .moment-meta-title {
+    min-height: 70px;
+    padding: 0 20px;
+    font-size: 1.12rem;
+  }
+
+  .moment-meta-body {
+    min-height: min(48vh, calc(100vh - 170px));
+    max-height: calc(100vh - 150px);
+    padding: 14px 26px 14px 14px;
+  }
+
+  .moment-pages-region,
+  .moment-pages-stack {
+    min-height: 0;
+    height: 100%;
+    --page-preview-height: min(92px, 22%);
+    --page-stack-gap: 10px;
+  }
+
+  .moment-pages-stack {
+    width: calc(100% - 22px);
+  }
+
+  .moment-pages-scrollbar {
+    top: 14px;
+    right: 2px;
+    bottom: 14px;
+    width: 8px;
+  }
+
+  .moment-page-input,
+  .moment-page-preview {
+    font-size: 0.95rem;
+  }
+
+  .moment-page-input {
+    min-height: 180px;
+  }
+
+  .moment-attachments {
+    max-height: min(16vh, 132px);
+  }
+}
