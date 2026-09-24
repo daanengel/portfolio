@@ -157,8 +157,8 @@ a {
 /* below are meant to put video into position*/
 .video-container {
 	position: relative;
-	width: 1140px; /* replace with your desired video width */
-	height: 641px; /* replace with your desired video height */
+	width: 100%;
+	aspect-ratio: 16 / 9;
 	margin: 0 auto;
   }
   
@@ -171,18 +171,18 @@ a {
   }
 
   .video-container_mp4 {
-	width: 341px; /* replace with your desired video width */
-	height: 600px; /* replace with your desired video height */
+	position: relative;
+	width: min(100%, 341px);
+	aspect-ratio: 341 / 600;
 	margin: 0 auto;
   }
   
   .video-container_mp4 iframe {
 	position: absolute;
-	top: 50%; /* change top to 50% to position the top of the iframe in the middle */
-	left: 50%; /* change left to 50% to position the left of the iframe in the middle */
-	transform: translate(-50%, -50%); /* add this line to center the iframe both vertically and horizontally */
-	width: 75%;
-	height: 75%;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
   }
 
   /*below are meant to contrain/crop the images of about page to certain aspect ratios*/
