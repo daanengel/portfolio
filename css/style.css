@@ -224,6 +224,13 @@ a {
 
 a:focus, img:focus, button:focus, .btn:focus {outline: none;}
 
+.work-images .project-video {
+	display: block;
+	width: 100%;
+	height: auto;
+	background-color: #000;
+}
+
 /*selecting with mouse color*/
 ::-moz-selection {background-color:#198eb1;color:#fff;text-shadow:none;}
 

@@ -36,13 +36,16 @@
 
 
 
-.grid figure img {
+.grid figure img,
+.grid figure video {
 
 	position: relative;
 
 	display: block;
 
 	min-height: 100%;
+
+	width: 100%;
 
 	max-width: 100%;
 
@@ -185,7 +188,8 @@ figure.effect-oscar {
 
 
 
-figure.effect-oscar img {
+figure.effect-oscar img,
+figure.effect-oscar video {
 
 	opacity: 1;
 
@@ -303,7 +307,8 @@ figure.effect-oscar:hover figcaption {
 
 
 
-figure.effect-oscar:hover img {
+figure.effect-oscar:hover img,
+figure.effect-oscar:hover video {
 
 	opacity: 0.4;
 
